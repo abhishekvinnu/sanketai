@@ -22,7 +22,7 @@ const Index = () => {
     setResult(null);
 
     try {
-      const res = await fetch("http://sanketai-production.up.railway.app/api/verify-news", {
+      const res = await fetch("https://sanketai-production.up.railway.app/api/verify-news", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
