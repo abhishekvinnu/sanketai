@@ -37,20 +37,31 @@ public class DetectionService {
                     maxScore = score;
                     label = node.get("label").asText();
                     confidence = Math.round(score * 100.0);
-//                    confidence = Math.round(score * 10000.0) / 100.0;
                 }
+            }
+            if(confidence < 55){
+                label = "uncertain";
             }
 
         }catch(Exception e){
             e.printStackTrace();
         }
 
-        String verdict = switch(label){
-            case "fake" -> "POTENTIALLY MISLEADING";
-            case "misleading" -> "SUSPICIOUS";
-            case "real" -> "LIKELY FACTUAL";
-            default -> "UNCLEAR";
-        };
+        String verdict;
+
+        if(label.equals("This news is completely false")){
+            verdict = "POTENTIALLY MISLEADING";
+        }
+        else if(label.equals("This news is misleading or partially false")){
+            verdict = "SUSPICIOUS";
+        }
+        else if(label.equals("This news is factually correct")){
+            verdict = "LIKELY FACTUAL";
+        }
+        else{
+            verdict = "UNCLEAR";
+        }
+
 
         return NewsResponse.builder()
                 .verdict(verdict)

@@ -32,7 +32,12 @@ public class HuggingFaceClient {
         payload.put("inputs", text);
 
         Map<String, Object> params = new HashMap<>();
-        params.put("candidate_labels", List.of("fake", "misleading", "real"));
+        params.put("candidate_labels", List.of(
+                "This news is factually correct",
+                "This news is misleading or partially false",
+                "This news is completely false"
+        ));
+
 
         payload.put("parameters", params);
 
