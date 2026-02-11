@@ -184,8 +184,4 @@ By combining modern web technologies with AI, SanketAI demonstrates a practical 
 ---
 
 **Always verify before you share.**
-<img width="1012" height="418" alt="result_card" src="https://github.com/user-attachments/assets/80e4a386-3d52-46bd-b6ac-b867bffaddb4" />
-<img width="1023" height="508" alt="reporting" src="https://github.com/user-attachments/assets/92be6746-fe79-43bc-96f9-2a48bb67e235" />
-<img width="1024" height="468" alt="legal_awareness" src="https://github.com/user-attachments/assets/0839afe7-b15e-4873-b018-db29953ccb1d" />
-<img width="1227" height="916" alt="home" src="https://github.com/user-attachments/assets/4f54f1ca-3488-4ecc-945d-a6ae106925a7" />
-<img width="1017" height="451" alt="guidance" src="https://github.com/user-attachments/assets/cc0afde3-6952-4e94-b9de-97a84da2f92a" />
+
