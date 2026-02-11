@@ -22,9 +22,9 @@ Fake news today plays a critical role in influencing public opinion, disrupting 
 SanketAI does **not browse the internet or verify facts in real time**.  
 Instead, it uses **zero-shot classification** to analyze the *linguistic credibility* of the provided text and classify it into:
 
-- **Likely Factual**
-- **Suspicious**
-- **Potentially Misleading**
+- **This news is factually accurate and supported by reliable evidence.**
+- **This news is misleading, exaggerated, or lacks proper evidence.**
+- **This news is completely fabricated or false.**
 
 This approach is lightweight, scalable, and effective for identifying viral misinformation patterns such as sensational language, unverified claims, and misleading phrasing.
 
