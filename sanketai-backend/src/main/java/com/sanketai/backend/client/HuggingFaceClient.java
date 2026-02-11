@@ -17,8 +17,6 @@ public class HuggingFaceClient {
     @Value("${huggingface.api.key}")
     private String apiKey;
 
-    private final RestTemplate restTemplate = new RestTemplate();
-
     public String analyze(String text) {
 
         RestTemplate restTemplate = new RestTemplate();
