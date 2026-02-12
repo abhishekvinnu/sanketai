@@ -29,33 +29,38 @@ public class DetectionService {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(result);
 
-            double maxScore = 0;
+            JsonNode first = root.get(0);
 
-            for (JsonNode node : root) {
-                double score = node.get("score").asDouble();
+            JsonNode labelsNode = first.get("labels");
+            JsonNode scoresNode = first.get("scores");
 
-                if (score > maxScore) {
-                    maxScore = score;
-                    label = node.get("label").asText();
-                    confidence = Math.round(score * 100.0);
-                }
-            }
+            String topLabel = labelsNode.get(0).asText();
+            double topScore = scoresNode.get(0).asDouble();
+
+            label = topLabel;
+            confidence = Math.round(topScore * 100.0);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        String verdict;
 
-        if (label.contains("fabricated")) {
+        String verdict;
+        String lowerLabel = label.toLowerCase();
+
+        if (lowerLabel.contains("fabricated")) {
             verdict = "fake";
-        } else if (label.contains("misleading")) {
+        }
+        else if (lowerLabel.contains("misleading")) {
             verdict = "misleading";
-        } else if (label.contains("factually accurate")) {
+        }
+        else if (lowerLabel.contains("factually accurate")) {
             verdict = "real";
-        } else {
+        }
+        else {
             verdict = "uncertain";
         }
+
 
 
         return NewsResponse.builder()
