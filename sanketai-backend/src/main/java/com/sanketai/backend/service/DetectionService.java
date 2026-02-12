@@ -48,13 +48,13 @@ public class DetectionService {
         String verdict;
 
         if (label.contains("fabricated")) {
-            verdict = "LIKELY FAKE";
+            verdict = "fake";
         } else if (label.contains("misleading")) {
-            verdict = "LIKELY MISLEADING";
+            verdict = "misleading";
         } else if (label.contains("factually accurate")) {
-            verdict = "LIKELY FACTUAL";
+            verdict = "real";
         } else {
-            verdict = "UNCERTAIN";
+            verdict = "uncertain";
         }
 
 

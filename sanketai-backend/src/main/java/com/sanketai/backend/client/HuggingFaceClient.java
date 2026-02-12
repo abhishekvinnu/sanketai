@@ -37,7 +37,7 @@ public class HuggingFaceClient {
 
         ));
 
-        params.put("multi_label", true);
+        params.put("multi_label", false);
 
 
 
