@@ -22,37 +22,40 @@ const Index = () => {
     setResult(null);
 
     try {
-      const res = await fetch("https://sanketai-production.up.railway.app/api/verify-news", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
+      const res = await fetch(
+        "https://sanketai-production.up.railway.app/api/verify-news",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text }),
         },
-        body: JSON.stringify({ text })
-      });
+      );
 
       if (!res.ok) throw new Error("Backend error");
 
       const data = await res.json();
 
-      let status: VerificationStatus = "misleading";
+      let status: VerificationStatus = data.verdict;
 
-      if (data.verdict === "LIKELY FACTUAL") status = "real";
-      else if (data.verdict === "POTENTIALLY MISLEADING") status = "fake";
-      else status = "misleading";
+      let summary = "";
 
-      const summary =
-        data.verdict === "LIKELY FACTUAL"
-          ? "This content appears credible based on AI analysis."
-          : data.verdict === "POTENTIALLY MISLEADING"
-          ? "This content shows signs of misinformation. Please avoid sharing."
-          : "This content may be misleading. Further verification is recommended.";
+      if (data.verdict === "real") {
+        summary = "This content appears credible based on AI analysis.";
+      } else if (data.verdict === "fake") {
+        summary = "This content appears fabricated or false. Avoid sharing.";
+      } else if (data.verdict === "misleading") {
+        summary = "This content may distort facts or exaggerate claims.";
+      } else {
+        summary = "The system could not confidently determine reliability.";
+      }
 
       setResult({
         status,
         confidence: data.confidence,
-        summary
+        summary,
       });
-
     } catch (error) {
       alert("Backend not reachable. Make sure Spring Boot is running.");
       console.error(error);
@@ -72,7 +75,6 @@ const Index = () => {
           <section className="py-8 md:py-12">
             <div className="container px-4 md:px-6">
               <div className="mx-auto max-w-3xl space-y-6">
-
                 <ResultCard
                   status={result.status}
                   confidence={result.confidence}
@@ -82,7 +84,6 @@ const Index = () => {
                 <GuidanceSection status={result.status} />
                 <LegalAwarenessSection status={result.status} />
                 <ReportingSection status={result.status} />
-
               </div>
             </div>
           </section>
