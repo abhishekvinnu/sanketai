@@ -22,9 +22,6 @@ public class DetectionService {
 
         String result = hf.analyze(text);
 
-        System.out.println("HF RAW RESPONSE:");
-        System.out.println(result);
-
 
         String label = "unclear";
         double confidence = 0;
@@ -33,20 +30,17 @@ public class DetectionService {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(result);
 
-            JsonNode first = root.get(0);
+            JsonNode top = root.get(0);
 
-            JsonNode labelsNode = first.get("labels");
-            JsonNode scoresNode = first.get("scores");
+            label = top.get("label").asText();
+            double topScore = top.get("score").asDouble();
 
-            String topLabel = labelsNode.get(0).asText();
-            double topScore = scoresNode.get(0).asDouble();
-
-            label = topLabel;
             confidence = Math.round(topScore * 100.0);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
 
         String verdict;
