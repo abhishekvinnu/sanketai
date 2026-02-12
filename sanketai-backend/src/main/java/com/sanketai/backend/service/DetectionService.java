@@ -22,6 +22,10 @@ public class DetectionService {
 
         String result = hf.analyze(text);
 
+        System.out.println("HF RAW RESPONSE:");
+        System.out.println(result);
+
+
         String label = "unclear";
         double confidence = 0;
 
