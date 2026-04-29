@@ -23,7 +23,7 @@ const Index = () => {
 
     try {
       const res = await fetch(
-        "https://sanketai-production.up.railway.app/api/verify-news",
+        "/api/verify-news",
         {
           method: "POST",
           headers: {
